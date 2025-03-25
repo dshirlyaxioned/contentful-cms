@@ -25,8 +25,6 @@ const Posts = async () => {
   );
   const blogs = data.postCollection.items;
 
-  console.log(blogs, "blogs");
-
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="max-w-4xl w-full p-6 bg-white rounded-lg shadow-lg">
