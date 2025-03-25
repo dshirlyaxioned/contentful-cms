@@ -19,10 +19,6 @@ interface BlogPost {
   };
 }
 
-interface BlogPostPageProps {
-  params: { slug: string };
-}
-
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const { postCollection } = await client.request<{
@@ -36,8 +32,13 @@ async function getPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getPost(params.slug);
+export default async function BlogPostPage(props: {
+  params: { slug: string } | Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await props.params; 
+  console.log(resolvedParams, "resolvedParams");
+
+  const post = await getPost(resolvedParams.slug);
 
   if (!post) {
     notFound();
