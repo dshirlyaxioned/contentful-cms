@@ -7,7 +7,7 @@ interface BlogPost {
   title: string;
   slug: string;
   paragraph: string;
-  content: { json: any }; // Adjust this if using a specific rich text type
+  content: { json: Document }; // Adjust this if using a specific rich text type
   coverImage: {
     title: string;
     fileName: string;
