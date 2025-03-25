@@ -19,6 +19,10 @@ interface BlogPost {
   };
 }
 
+interface BlogPostPageProps {
+  params: { slug: string };
+}
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const { postCollection } = await client.request<{
@@ -32,11 +36,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getPost(params.slug);
 
   if (!post) {
